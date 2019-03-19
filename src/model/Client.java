@@ -1,4 +1,4 @@
-package application;
+package model;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +13,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -44,9 +47,11 @@ public class Client {
 	}
 
 	public void leaveChat(String text) throws IOException {
+		DateFormat format = new SimpleDateFormat("HH:mm:ss");
+		var date = new Date();
 		this.dout.writeUTF(LoginName + " " + "LOGOUT");
 		System.out.println("CLIENT " + text);
-		var file = new File("../chatroom.txt");
+		var file = new File(this.LoginName + "_" + format.format(date) + ".txt");
 		var writer = new FileWriter(file);
 		writer.write(text);
 		writer.close();

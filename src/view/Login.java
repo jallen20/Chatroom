@@ -6,17 +6,16 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import javax.swing.plaf.synth.SynthSpinnerUI;
-
-import application.Client;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import model.Message;
+import model.Client;
 
 public class Login {
 
@@ -46,7 +45,7 @@ public class Login {
 	private Socket socket;
 	private Client client;
 	private String loginName;
-	
+
 	private boolean loggedIn;
 
 	@FXML
@@ -54,6 +53,7 @@ public class Login {
 		this.loggedIn = false;
 		this.btnSend.setDisable(true);
 		
+
 	}
 
 	@FXML
@@ -90,13 +90,13 @@ public class Login {
 		this.client.writeMessage(this.loginName + "  : " + text);
 		this.txtMessage.clear();
 	}
-	
+
 	@FXML
-    void logout(ActionEvent event) throws IOException {
+	void logout(ActionEvent event) throws IOException {
 		var text = this.areaMessages.getText();
 		System.out.println("LOGIN " + text);
-		this.client.leaveChat(" LOGIN " +  text);
+		this.client.leaveChat(" LOGIN " + text);
 		System.exit(1);
-    }
+	}
 
 }
