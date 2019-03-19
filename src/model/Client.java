@@ -70,7 +70,7 @@ public class Client {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void leaveChat(String text) throws IOException {
-		DateFormat format = new SimpleDateFormat("HH:mm:ss");
+		DateFormat format = new SimpleDateFormat("HH-mm-ss");
 		var date = new Date();
 		this.dout.writeUTF(LoginName + " " + "LOGOUT");
 		var file = new File(this.LoginName + "_" + format.format(date) + ".txt");
