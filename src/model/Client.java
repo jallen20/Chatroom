@@ -32,10 +32,11 @@ public class Client {
 
 	/**
 	 * Creates a client
-	 * @param login client login
-	 * @param din data in
-	 * @param dout data out
-	 * @param socket 
+	 * 
+	 * @param login  client login
+	 * @param din    data in
+	 * @param dout   data out
+	 * @param socket
 	 * @throws UnknownHostException
 	 * @throws IOException
 	 * 
@@ -59,6 +60,7 @@ public class Client {
 
 	/**
 	 * Save a text file of the clients chat window
+	 * 
 	 * @param text input text
 	 * @throws IOException
 	 * @postcondition saves text to a file
@@ -67,7 +69,6 @@ public class Client {
 		DateFormat format = new SimpleDateFormat("HH-mm-ss");
 		var date = new Date();
 		this.dout.writeUTF(LoginName + " " + "LOGOUT");
-		System.out.println("CLIENT " + text);
 		String other = this.LoginName + "_" + format.format(date) + ".txt";
 		var file = new File(other);
 		var writer = new FileWriter(file);

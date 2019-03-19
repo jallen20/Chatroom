@@ -52,7 +52,6 @@ public class Login {
 	void initialize() throws UnknownHostException, IOException {
 		this.loggedIn = false;
 		this.btnSend.setDisable(true);
-		
 
 	}
 
@@ -94,8 +93,7 @@ public class Login {
 	@FXML
 	void logout(ActionEvent event) throws IOException {
 		var text = this.areaMessages.getText();
-		System.out.println("LOGIN " + text);
-		this.client.leaveChat(" LOGIN " + text);
+		this.client.leaveChat( text);
 		System.exit(1);
 	}
 
