@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import application.Client;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,10 +46,14 @@ public class Login {
 	private Socket socket;
 	private Client client;
 	private String loginName;
+	
+	private boolean loggedIn;
 
 	@FXML
 	void initialize() throws UnknownHostException, IOException {
-
+		this.loggedIn = false;
+		this.btnSend.setDisable(true);
+		
 	}
 
 	@FXML
@@ -73,6 +78,10 @@ public class Login {
 		thread.start();
 
 		this.client = new Client(this.txtUsername.getText(), this.inputStream, this.outputStream, this.socket);
+		if (this.btnSend.isDisabled()) {
+			this.btnSend.setDisable(false);
+			this.btnLogn.setDisable(true);
+		}
 	}
 
 	@FXML
@@ -87,6 +96,7 @@ public class Login {
 		var text = this.areaMessages.getText();
 		System.out.println("LOGIN " + text);
 		this.client.leaveChat(" LOGIN " +  text);
+		System.exit(1);
     }
 
 }
