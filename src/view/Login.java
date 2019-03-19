@@ -60,7 +60,7 @@ public class Login {
 	void login(ActionEvent event) throws UnknownHostException, IOException {
 		this.loginName = this.txtUsername.getText();
 
-		this.socket = new Socket("localhost", 4225);
+		this.socket = new Socket("160.10.217.126", 4225);
 		this.inputStream = new DataInputStream(this.socket.getInputStream());
 		this.outputStream = new DataOutputStream(this.socket.getOutputStream());
 		Runnable messageListener = () -> {

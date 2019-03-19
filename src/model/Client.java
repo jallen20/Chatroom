@@ -47,11 +47,12 @@ public class Client {
 	}
 
 	public void leaveChat(String text) throws IOException {
-		DateFormat format = new SimpleDateFormat("HH:mm:ss");
+		DateFormat format = new SimpleDateFormat("HH-mm-ss");
 		var date = new Date();
 		this.dout.writeUTF(LoginName + " " + "LOGOUT");
 		System.out.println("CLIENT " + text);
-		var file = new File(this.LoginName + "_" + format.format(date) + ".txt");
+		String other = this.LoginName + "_" + format.format(date) + ".txt";
+		var file = new File(other);
 		var writer = new FileWriter(file);
 		writer.write(text);
 		writer.close();
