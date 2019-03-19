@@ -25,11 +25,22 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Client {
-	Socket socket;
-	DataInputStream din;
-	DataOutputStream dout;
-	String LoginName;
+	private Socket socket;
+	private DataInputStream din;
+	private DataOutputStream dout;
+	private String LoginName;
 
+	/**
+	 * Creates a client
+	 * @param login client login
+	 * @param din data in
+	 * @param dout data out
+	 * @param socket 
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 * 
+	 * @postcondition creates a client
+	 */
 	public Client(String login, DataInputStream din, DataOutputStream dout, Socket socket)
 			throws UnknownHostException, IOException {
 		LoginName = login;
@@ -46,6 +57,12 @@ public class Client {
 		this.dout.writeUTF(message);
 	}
 
+	/**
+	 * Save a text file of the clients chat window
+	 * @param text input text
+	 * @throws IOException
+	 * @postcondition saves text to a file
+	 */
 	public void leaveChat(String text) throws IOException {
 		DateFormat format = new SimpleDateFormat("HH-mm-ss");
 		var date = new Date();
