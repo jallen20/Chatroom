@@ -5,18 +5,30 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+
+
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import model.Client;
+
 
 /**
  * The Class Login.
  * 
  * @precondition: None
  */
+
 public class Login {
 
 	@FXML
@@ -52,18 +64,21 @@ public class Login {
 
 	private boolean loggedIn;
 
+
 	/**
 	 * Initialize.
 	 * 
 	 * @throws UnknownHostException the unknown host exception
 	 * @throws IOException          Signals that an I/O exception has occurred.
 	 */
+
 	@FXML
 	void initialize() throws UnknownHostException, IOException {
 		this.loggedIn = false;
 		this.btnSend.setDisable(true);
 
 	}
+
 
 	/**
 	 * Login screen
@@ -72,6 +87,7 @@ public class Login {
 	 * @throws UnknownHostException the unknown host exception
 	 * @throws IOException          Signals that an I/O exception has occurred.
 	 */
+
 	@FXML
 	void login(ActionEvent event) throws UnknownHostException, IOException {
 		this.loginName = this.txtUsername.getText();
@@ -83,8 +99,10 @@ public class Login {
 			while (true) {
 				try {
 					this.areaMessages.appendText(this.inputStream.readUTF() + "\n");
-				} catch (IOException e) {
-
+				}
+					catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		};
@@ -106,6 +124,7 @@ public class Login {
 	 * @throws IOException          Signals that an I/O exception has occurred.
 	 * @throws InterruptedException the interrupted exception
 	 */
+
 	@FXML
 	void send(ActionEvent event) throws IOException, InterruptedException {
 		String text = this.txtMessage.getText();
@@ -113,17 +132,11 @@ public class Login {
 		this.txtMessage.clear();
 	}
 
-	/**
-	 * Logout button
-	 * 
-	 * @param event the event
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
+
 	@FXML
 	void logout(ActionEvent event) throws IOException {
 		var text = this.areaMessages.getText();
-		System.out.println("LOGIN " + text);
-		this.client.leaveChat(" LOGIN " + text);
+		this.client.leaveChat( text);
 		System.exit(1);
 	}
 
