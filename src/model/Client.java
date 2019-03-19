@@ -1,11 +1,5 @@
 package model;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -17,35 +11,65 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
+/**
+ * Client side of application.
+ *
+ * @author William Huynh Justin Alan Marcus Douglas
+ */
 public class Client {
+	
+	
 	Socket socket;
+	
+	
 	DataInputStream din;
+	
+	
 	DataOutputStream dout;
+	
 	String LoginName;
 
+	/**
+	 * Instantiates a new client.
+	 *
+	 * @param login the login
+	 * @param din the din
+	 * @param dout the dout
+	 * @param socket the socket
+	 * @throws UnknownHostException the unknown host exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public Client(String login, DataInputStream din, DataOutputStream dout, Socket socket)
 			throws UnknownHostException, IOException {
 		LoginName = login;
 		this.socket = socket;
 		this.din = din;
 		this.dout = dout;
-//		
+
 		this.dout.writeUTF(LoginName);
 		this.dout.writeUTF(LoginName + " " + "LOGIN");
 
 	}
 
+	
+	
+	/**
+	 * Write message.
+	 *
+	 * @param message the message
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void writeMessage(String message) throws IOException {
 		this.dout.writeUTF(message);
 	}
 
+	/**
+	 * Leave chat.
+	 *
+	 * @param text the text
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void leaveChat(String text) throws IOException {
 		DateFormat format = new SimpleDateFormat("HH:mm:ss");
 		var date = new Date();

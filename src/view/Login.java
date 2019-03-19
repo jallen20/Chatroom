@@ -5,18 +5,18 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import model.Client;
 
+/**
+ * The Class Login.
+ * 
+ * @precondition: None
+ */
 public class Login {
 
 	@FXML
@@ -41,26 +41,42 @@ public class Login {
 	private Button btnLogout;
 
 	private DataInputStream inputStream;
+
 	private DataOutputStream outputStream;
+
 	private Socket socket;
+
 	private Client client;
+
 	private String loginName;
 
 	private boolean loggedIn;
 
+	/**
+	 * Initialize.
+	 * 
+	 * @throws UnknownHostException the unknown host exception
+	 * @throws IOException          Signals that an I/O exception has occurred.
+	 */
 	@FXML
 	void initialize() throws UnknownHostException, IOException {
 		this.loggedIn = false;
 		this.btnSend.setDisable(true);
-		
 
 	}
 
+	/**
+	 * Login screen
+	 * 
+	 * @param event the event
+	 * @throws UnknownHostException the unknown host exception
+	 * @throws IOException          Signals that an I/O exception has occurred.
+	 */
 	@FXML
 	void login(ActionEvent event) throws UnknownHostException, IOException {
 		this.loginName = this.txtUsername.getText();
 
-		this.socket = new Socket("localhost", 4225);
+		this.socket = new Socket("160.10.217.126", 4225);
 		this.inputStream = new DataInputStream(this.socket.getInputStream());
 		this.outputStream = new DataOutputStream(this.socket.getOutputStream());
 		Runnable messageListener = () -> {
@@ -68,8 +84,7 @@ public class Login {
 				try {
 					this.areaMessages.appendText(this.inputStream.readUTF() + "\n");
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+
 				}
 			}
 		};
@@ -84,6 +99,13 @@ public class Login {
 		}
 	}
 
+	/**
+	 * Send message button
+	 * 
+	 * @param event the event
+	 * @throws IOException          Signals that an I/O exception has occurred.
+	 * @throws InterruptedException the interrupted exception
+	 */
 	@FXML
 	void send(ActionEvent event) throws IOException, InterruptedException {
 		String text = this.txtMessage.getText();
@@ -91,6 +113,12 @@ public class Login {
 		this.txtMessage.clear();
 	}
 
+	/**
+	 * Logout button
+	 * 
+	 * @param event the event
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@FXML
 	void logout(ActionEvent event) throws IOException {
 		var text = this.areaMessages.getText();
