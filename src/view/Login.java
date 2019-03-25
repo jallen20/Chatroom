@@ -76,6 +76,7 @@ public class Login {
 	void initialize() throws UnknownHostException, IOException {
 		this.loggedIn = false;
 		this.btnSend.setDisable(true);
+		this.btnLogout.setDisable(true);
 
 	}
 
@@ -92,7 +93,7 @@ public class Login {
 	void login(ActionEvent event) throws UnknownHostException, IOException {
 		this.loginName = this.txtUsername.getText();
 
-		this.socket = new Socket("160.10.217.125", 4225);
+		this.socket = new Socket("127.0.0.1", 4225);
 		this.inputStream = new DataInputStream(this.socket.getInputStream());
 		this.outputStream = new DataOutputStream(this.socket.getOutputStream());
 		Runnable messageListener = () -> {
@@ -114,6 +115,7 @@ public class Login {
 		if (this.btnSend.isDisabled()) {
 			this.btnSend.setDisable(false);
 			this.btnLogn.setDisable(true);
+			this.btnLogout.setDisable(false);
 		}
 	}
 

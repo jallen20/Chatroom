@@ -28,6 +28,7 @@ public class Main extends Application {
 		loader.load();
 		Parent parent = loader.getRoot();
 		Scene scene = new Scene(parent);
+		scene.getStylesheets().add("view/main.css");
 		primaryStage.setTitle(Main.MAIN_WINDOW_TITLE);
 		primaryStage.setScene(scene);
 		primaryStage.show();

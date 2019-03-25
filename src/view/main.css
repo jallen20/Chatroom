@@ -1,0 +1,14 @@
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: #317ccf;
+}
+
+.text-field, .text-area {
+    -fx-background-insets: 0 0 0 0,0 0 0 0,0 0 0 0,0 0 0 0;
+}
+
+#logo {
+    -fx-font-color:#317ccf;
+}
